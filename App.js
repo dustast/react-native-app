@@ -1,11 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput, } from 'react-native';
 
 export default class App extends React.Component {
+  state = {
+    placeText = ""
+  }
+
+onChangedHandler = (value) => {
+this.setState({
+    placeText:value
+  });
+};
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <TextInput
+          style = {{width:300}}
+          value = {this.state.placeText}
+          onChangeText = {this.onChangedHandler} 
+          placeholder = "Enter an cool place" 
+          />
       </View>
     );
   }
