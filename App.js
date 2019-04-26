@@ -1,26 +1,54 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button} from 'react-native';
 
 export default class App extends React.Component {
   state = {
-    placeText = ""
+    placeText: "",
+    place: []
   }
 
 onChangedHandler = (value) => {
 this.setState({
-    placeText:value
+    placeText: value
+  });
+};
+
+addPlaceHandler = () => {
+  if (this.state.placeText.trim() === "") {
+    return;
+  }
+
+  this.setState(prevState => {
+    return {
+    place: prevState.place.concat(prevState.placeText)
+    };
   });
 };
 
   render() {
+    const placesOutput = this.state.place.map((place, i) => {
+      <Text key={i}>{place}</Text>
+    });
     return (
       <View style={styles.container}>
-        <TextInput
-          style = {{width:300}}
+        <View style = {styles.inputContainer}>
+      <TextInput
+          style = {{width: "70%"}}
           value = {this.state.placeText}
           onChangeText = {this.onChangedHandler} 
           placeholder = "Enter an cool place" 
           />
+          <Button
+            onPress= {this.addPlaceHandler}
+            style = {{width: "30%"}}
+            title="Search"
+            color="#841584"
+            accessibilityLabel="Learn more about this purple button"
+            />
+       </View>
+      <View>
+      {placesOutput}
+      </View>
       </View>
     );
   }
@@ -28,9 +56,17 @@ this.setState({
 
 const styles = StyleSheet.create({
   container: {
+    
     flex: 1,
+    padding: 25,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
+  inputContainer: {
+    width: "100%",
+    flexDirection: 'row',
+    justifyContent: "space-between",
+    alignItems: "center"
+  }
 });
