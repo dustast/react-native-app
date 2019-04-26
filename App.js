@@ -26,9 +26,9 @@ addPlaceHandler = () => {
 };
 
   render() {
-    const placesOutput = this.state.place.map((place, i) => {
+    const placesOutput = this.state.place.map((place, i) => 
       <Text key={i}>{place}</Text>
-    });
+    );
     return (
       <View style={styles.container}>
         <View style = {styles.inputContainer}>
@@ -41,13 +41,13 @@ addPlaceHandler = () => {
           <Button
             onPress= {this.addPlaceHandler}
             style = {{width: "30%"}}
-            title="Search"
+            title="Add"
             color="#841584"
             accessibilityLabel="Learn more about this purple button"
             />
        </View>
       <View>
-      {placesOutput}
+      <Text>{placesOutput}</Text>
       </View>
       </View>
     );
